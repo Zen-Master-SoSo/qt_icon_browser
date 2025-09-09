@@ -417,17 +417,28 @@ QT_STANDARD_PIXMAPS = [
 	('QStyle.SP_MediaSeekForward', QStyle.SP_MediaSeekForward, 'Icon indicating that media should seek forward.'),
 	('QStyle.SP_MediaSeekBackward', QStyle.SP_MediaSeekBackward, 'Icon indicating that media should seek backward.'),
 	('QStyle.SP_MediaVolume', QStyle.SP_MediaVolume, 'Icon indicating a volume control.'),
-	('QStyle.SP_MediaVolumeMuted', QStyle.SP_MediaVolumeMuted, 'Icon indicating a muted volume control.'),
-	('QStyle.SP_LineEditClearButton', QStyle.SP_LineEditClearButton, 'Icon for a standard clear button in a QLineEdit. This enum value was added in Qt 5.2.'),
-	('QStyle.SP_DialogYesToAllButton', QStyle.SP_DialogYesToAllButton, 'Icon for a standard YesToAll button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
-	('QStyle.SP_DialogNoToAllButton', QStyle.SP_DialogNoToAllButton, 'Icon for a standard NoToAll button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
-	('QStyle.SP_DialogSaveAllButton', QStyle.SP_DialogSaveAllButton, 'Icon for a standard SaveAll button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
-	('QStyle.SP_DialogAbortButton', QStyle.SP_DialogAbortButton, 'Icon for a standard Abort button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
-	('QStyle.SP_DialogRetryButton', QStyle.SP_DialogRetryButton, 'Icon for a standard Retry button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
-	('QStyle.SP_DialogIgnoreButton', QStyle.SP_DialogIgnoreButton, 'Icon for a standard Ignore button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
-	('QStyle.SP_RestoreDefaultsButton', QStyle.SP_RestoreDefaultsButton, 'Icon for a standard RestoreDefaults button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
-	('QStyle.SP_CustomBase', QStyle.SP_CustomBase, 'Base value for custom standard elems; custom values must be greater than this value. ')
+	('QStyle.SP_MediaVolumeMuted', QStyle.SP_MediaVolumeMuted, 'Icon indicating a muted volume control.')
 ]
+
+try:
+	QT_STANDARD_PIXMAPS.extend([
+		('QStyle.SP_LineEditClearButton', QStyle.SP_LineEditClearButton, 'Icon for a standard clear button in a QLineEdit. This enum value was added in Qt 5.2.')
+	])
+except AttributeError:
+	pass
+
+try:
+	QT_STANDARD_PIXMAPS.extend([
+		('QStyle.SP_DialogYesToAllButton', QStyle.SP_DialogYesToAllButton, 'Icon for a standard YesToAll button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
+		('QStyle.SP_DialogNoToAllButton', QStyle.SP_DialogNoToAllButton, 'Icon for a standard NoToAll button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
+		('QStyle.SP_DialogSaveAllButton', QStyle.SP_DialogSaveAllButton, 'Icon for a standard SaveAll button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
+		('QStyle.SP_DialogAbortButton', QStyle.SP_DialogAbortButton, 'Icon for a standard Abort button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
+		('QStyle.SP_DialogRetryButton', QStyle.SP_DialogRetryButton, 'Icon for a standard Retry button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
+		('QStyle.SP_DialogIgnoreButton', QStyle.SP_DialogIgnoreButton, 'Icon for a standard Ignore button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
+		('QStyle.SP_RestoreDefaultsButton', QStyle.SP_RestoreDefaultsButton, 'Icon for a standard RestoreDefaults button in a QDialogButtonBox. This enum value was added in Qt 5.14.'),
+	])
+except AttributeError:
+	pass
 
 DIR = [
 	('Action', STANDARD_ACTION_ICONS),
@@ -510,12 +521,13 @@ class MainWindow(QMainWindow):
 		signal(SIGINT, self.system_signal)
 		signal(SIGTERM, self.system_signal)
 		self.tabs = QTabWidget(self)
+		self.setFixedWidth(640)
 		self.tabs.setFixedWidth(640)
 		self.setCentralWidget(self.tabs)
 		for label, icons in DIR:
 			self.tabs.addTab(IconFrame(self.tabs, icons), label)
 		self.tabs.addTab(PixmapFrame(self.tabs, QT_STANDARD_PIXMAPS), 'Pixmaps')
-		self.layout().setSizeConstraint(QLayout.SetMinimumSize)
+		#self.layout().setSizeConstraint(QLayout.SetMinimumSize)
 
 	# -----------------------------------------------------------------
 	# Signal handler
