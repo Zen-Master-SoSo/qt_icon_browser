@@ -31,7 +31,7 @@ from PyQt5.QtWidgets import 	QApplication, QMainWindow, QShortcut, QStyle, \
 								QLayout, QVBoxLayout, QGridLayout, \
 								QTabWidget, QFrame, QPushButton
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 STANDARD_ACTION_ICONS= [
