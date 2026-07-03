@@ -524,6 +524,7 @@ class MainWindow(QMainWindow):
 		self.setFixedWidth(640)
 		self.tabs.setFixedWidth(640)
 		self.setCentralWidget(self.tabs)
+		self.setWindowTitle('Qt Icon Browser')
 		for label, icons in DIR:
 			self.tabs.addTab(IconFrame(self.tabs, icons), label)
 		self.tabs.addTab(PixmapFrame(self.tabs, QT_STANDARD_PIXMAPS), 'Pixmaps')
